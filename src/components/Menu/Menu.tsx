@@ -29,8 +29,6 @@ export default function Menu() {
 
   const isError = !menu;
 
-  console.log(menu);
-
   const handleSubmit = () => {
     setInfo({ ...info, menu });
     setStep("date");

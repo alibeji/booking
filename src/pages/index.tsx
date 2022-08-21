@@ -9,7 +9,6 @@ import NavigationModule from "../components/Navigation/Navigation";
 
 const Home: NextPage = () => {
   const step = useRecoilValue(atomStep);
-  console.log(step);
 
   return (
     <div className={styles.container}>
