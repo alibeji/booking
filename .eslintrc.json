@@ -18,5 +18,48 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint"]
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "padding-line-between-statements": [
+      1,
+      {
+        "blankLine": "always",
+        "prev": [
+          "block",
+          "block-like",
+          "cjs-export",
+          "class",
+          "export",
+          "function",
+          "break"
+        ],
+        "next": "*"
+      },
+      {
+        "blankLine": "always",
+        "prev": ["multiline-const", "singleline-const"],
+        "next": ["return"]
+      },
+      {
+        "blankLine": "always",
+        "prev": ["multiline-const"],
+        "next": ["singleline-const"]
+      },
+      {
+        "blankLine": "always",
+        "prev": ["singleline-const"],
+        "next": ["multiline-const"]
+      },
+      {
+        "blankLine": "never",
+        "prev": ["singleline-const"],
+        "next": ["singleline-const"]
+      },
+      {
+        "blankLine": "any",
+        "prev": ["export", "import"],
+        "next": ["export", "import"]
+      }
+    ]
+  }
 }
