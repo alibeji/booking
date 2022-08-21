@@ -1,0 +1,27 @@
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  .logoContainer {
+    display: flex;
+
+    justify-content: flex-end;
+    height: 100%;
+  }
+  .siteMapContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    .restaurantLinks,
+    .about {
+      display: flex;
+      flex-direction: column;
+      padding: 0.5rem;
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+    }
+  }
+}

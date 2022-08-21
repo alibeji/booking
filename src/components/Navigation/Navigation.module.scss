@@ -1,0 +1,15 @@
+.NavigationModule {
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  button {
+    background-color: transparent;
+    color: rgb(40, 40, 40);
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+  }
+}
