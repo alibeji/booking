@@ -3,7 +3,7 @@ import { atom } from "recoil";
 
 export const step = atom<Steps>({
   key: "step",
-  default: "guests", // default value (aka initial value)
+  default: "guests",
 });
 
 export const info = atom<Partial<Info>>({
