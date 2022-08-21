@@ -6,9 +6,17 @@ import Menu from "../components/Menu/Menu";
 import { step as atomStep } from "../stores/steps";
 import styles from "../styles/Home.module.scss";
 import NavigationModule from "../components/Navigation/Navigation";
+import { useQuery } from "react-query";
+import fetchRestaurantData from "../utils/api/fetchRestaurantData";
+
+const restaurantId = "62c1a011e95e96a91dbfd023";
 
 const Home: NextPage = () => {
   const step = useRecoilValue(atomStep);
+
+  const { data } = useQuery("restaurants", () =>
+    fetchRestaurantData(restaurantId)
+  );
 
   return (
     <div className={styles.container}>
@@ -19,7 +27,7 @@ const Home: NextPage = () => {
       </Head>
       <NavigationModule />
       {step === "guests" && <Guests />}
-      {step === "menu" && <Menu />}
+      {step === "menu" && <Menu restaurantMenu={data?.menu} />}
     </div>
   );
 };

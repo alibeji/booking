@@ -6,19 +6,15 @@ import {
   Button,
 } from "@mui/material";
 import React, { useState } from "react";
-import { useQuery } from "react-query";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import fetchRestaurantData from "../../utils/api/fetchRestaurantData";
 import { info as atomInfo } from "../../stores/steps";
 import { step } from "../../stores/steps";
 
-const restaurantId = "62c1a011e95e96a91dbfd023";
+type MenuProps = {
+  restaurantMenu: string[] | undefined;
+};
 
-export default function Menu() {
-  const { data } = useQuery("restaurants", () =>
-    fetchRestaurantData(restaurantId)
-  );
-
+export default function Menu({ restaurantMenu }: MenuProps) {
   const setStep = useSetRecoilState(step);
   const [info, setInfo] = useRecoilState(atomInfo);
   const [menu, setMenu] = useState(info.menu ?? "");
@@ -39,7 +35,7 @@ export default function Menu() {
       <h2>Please choose a Menu</h2>
       <FormControl>
         <RadioGroup onChange={handleChange} value={menu}>
-          {data?.menu.map((meal) => (
+          {restaurantMenu?.map((meal) => (
             <FormControlLabel
               value={meal}
               control={<Radio />}
