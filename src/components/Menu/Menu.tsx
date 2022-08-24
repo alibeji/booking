@@ -32,7 +32,9 @@ export default function Menu({ restaurantMenu }: MenuProps) {
 
   return (
     <div>
-      <h2>Please choose a Menu</h2>
+      <h2 className="title">
+        Please <span>choose a Menu</span>
+      </h2>
       <FormControl>
         <RadioGroup onChange={handleChange} value={menu}>
           {restaurantMenu?.map((meal) => (

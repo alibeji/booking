@@ -8,6 +8,7 @@ import styles from "../styles/Home.module.scss";
 import NavigationModule from "../components/Navigation/Navigation";
 import { useQuery } from "react-query";
 import fetchRestaurantData from "../utils/api/fetchRestaurantData";
+import Calendar from "../components/Calendar/Calendar";
 
 const restaurantId = "62c1a011e95e96a91dbfd023";
 
@@ -28,6 +29,7 @@ const Home: NextPage = () => {
       <NavigationModule />
       {step === "guests" && <Guests />}
       {step === "menu" && <Menu restaurantMenu={data?.menu} />}
+      {step === "date" && <Calendar />}
     </div>
   );
 };
