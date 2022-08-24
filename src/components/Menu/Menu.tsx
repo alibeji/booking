@@ -31,11 +31,18 @@ export default function Menu({ restaurantMenu }: MenuProps) {
   };
 
   return (
-    <div>
+    <>
       <h2 className="title">
         Please <span>choose a Menu</span>
       </h2>
-      <FormControl>
+      <FormControl
+        className="form"
+        /*         sx={{
+          display: "flex",
+          flexDirection: "column",
+          rowGap: "2rem",
+        }} */
+      >
         <RadioGroup onChange={handleChange} value={menu}>
           {restaurantMenu?.map((meal) => (
             <FormControlLabel
@@ -58,6 +65,6 @@ export default function Menu({ restaurantMenu }: MenuProps) {
           Next
         </Button>
       </FormControl>
-    </div>
+    </>
   );
 }

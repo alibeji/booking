@@ -36,7 +36,7 @@ export default function Guests() {
       <h1 className="title">
         Please <span>choose the number</span> of Guests
       </h1>
-      <FormControl className={styles.guestNumberInputForm}>
+      <FormControl className="form">
         <OutlinedInput
           className={styles.guestNumberInput}
           type="number"
