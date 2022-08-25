@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Confirmation.module.scss";
+import styles from "./Conditions.module.scss";
 import { step as atomStep } from "../../stores/steps";
 import dayjs from "dayjs";
 import { info as atomInfo } from "../../stores/steps";
@@ -8,11 +8,11 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import Button from "@mui/material/Button";
 dayjs.extend(customParseFormat);
 
-type ConfirmationProps = {
+type ConditionsProps = {
   restaurantName: string;
 };
 
-export default function Confirmation({ restaurantName }: ConfirmationProps) {
+export default function Conditions({ restaurantName }: ConditionsProps) {
   const [step, setStep] = useRecoilState(atomStep);
   const { duration, time } = useRecoilValue(atomInfo);
 

@@ -9,7 +9,7 @@ import NavigationModule from "../components/Navigation/Navigation";
 import { useQuery } from "react-query";
 import fetchRestaurantData from "../utils/api/fetchRestaurantData";
 import Calendar from "../components/Calendar/Calendar";
-import Confirmation from "../components/Confirmation/Confirmation";
+import Conditions from "../components/Conditions/Conditions";
 
 const restaurantId = "62c1a011e95e96a91dbfd023";
 
@@ -32,7 +32,7 @@ const Home: NextPage = () => {
       {step === "menu" && <Menu restaurantMenu={data?.menu} />}
       {step === "date" && <Calendar />}
       {data && (step === "conditions" || step === "final") && (
-        <Confirmation restaurantName={data.name} />
+        <Conditions restaurantName={data.name} />
       )}
     </div>
   );
