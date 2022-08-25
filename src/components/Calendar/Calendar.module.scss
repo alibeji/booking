@@ -1,5 +1,28 @@
 .calendarWrapper {
   height: 100%;
+  .legendWrapper {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    p {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      justify-content: center;
+      div {
+        width: 15px;
+        height: 15px;
+        padding: 0.5rem;
+        border-radius: 4px;
+        &.greenLegend {
+          background-color: #52b34f;
+        }
+        &.redLegend {
+          background-color: #ee1b34;
+        }
+      }
+    }
+  }
   .timesWrapper {
     padding: 1rem 2rem;
     display: flex;

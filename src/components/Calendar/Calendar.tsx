@@ -100,6 +100,17 @@ export default function Calendar() {
         onClickDay={handleClickDay}
         value={date}
       />
+      <div className={styles.legendWrapper}>
+        <p>
+          <div className={styles.greenLegend} />
+          Slots available
+        </p>
+        <p>
+          <div className={styles.redLegend} />
+          No Slots available
+        </p>
+      </div>
+
       <div className={styles.durationSelector}>
         <p className="title">
           Please <span>select</span>
