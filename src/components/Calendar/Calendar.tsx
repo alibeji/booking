@@ -118,11 +118,11 @@ export default function Calendar() {
       />
       <div className={styles.legendWrapper}>
         <p>
-          <div className={styles.greenLegend} />
+          <span className={styles.greenLegend} />
           Slots available
         </p>
         <p>
-          <div className={styles.redLegend} />
+          <span className={styles.redLegend} />
           No Slots available
         </p>
       </div>
