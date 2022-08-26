@@ -92,6 +92,11 @@ input[type="number"] {
   justify-self: center;
 }
 
+.react-calendar__tile--now {
+  background-color: #52b34f;
+  color: white;
+}
+
 .greenTile {
   background-color: #52b34f;
   color: white;
@@ -103,7 +108,18 @@ input[type="number"] {
 }
 
 .react-calendar__tile--active {
-  border: 2px solid black;
+  position: relative;
+  background-color: #1087ff;
+  ::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    content: "";
+    width: 35px;
+    height: 35px;
+    border: 3px solid black;
+  }
 }
 
 .title {
