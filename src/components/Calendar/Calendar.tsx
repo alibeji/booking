@@ -121,24 +121,28 @@ export default function Calendar() {
         </select>
       </div>
       <div className={styles.timesWrapper}>
-        {availableTimes?.map((_time) => {
-          const formattedTime = dayjs(_time).format("HH:mm");
+        {!availableTimes ? (
+          <p>No times available on this date</p>
+        ) : (
+          availableTimes?.map((_time) => {
+            const formattedTime = dayjs(_time).format("HH:mm");
 
-          return (
-            <button
-              key={_time}
-              value={_time}
-              onClick={() => handleSelectTime(formattedTime)}
-              className={
-                info.time === formattedTime && day === info.day
-                  ? styles.selectedTime
-                  : ""
-              }
-            >
-              {formattedTime}
-            </button>
-          );
-        })}
+            return (
+              <button
+                key={_time}
+                value={_time}
+                onClick={() => handleSelectTime(formattedTime)}
+                className={
+                  info.time === formattedTime && day === info.day
+                    ? styles.selectedTime
+                    : ""
+                }
+              >
+                {formattedTime}
+              </button>
+            );
+          })
+        )}
       </div>
     </div>
   );
