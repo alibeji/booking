@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { info as atomInfo } from "../../stores/steps";
 import { step } from "../../stores/steps";
+import Skeleton from "react-loading-skeleton";
 
 const restaurantId = "62c1a011e95e96a91dbfd023";
 const today = dayjs();
@@ -84,11 +85,26 @@ export default function Calendar() {
   };
 
   if (
-    data[0].status !== "success" &&
-    data[1].status !== "success" &&
+    data[0].status !== "success" ||
+    data[1].status !== "success" ||
     data[2].status !== "success"
   )
-    return null;
+    return (
+      <>
+        <h2 className={styles.skeleton}>
+          <Skeleton count={7} />
+        </h2>
+        <p>
+          <Skeleton className={styles.skeleton} />
+        </p>
+        <h2 className={styles.skeleton}>
+          <Skeleton />
+        </h2>
+        <p>
+          <Skeleton count={3} className={styles.skeleton} />
+        </p>
+      </>
+    );
 
   return (
     <div className={styles.calendarWrapper}>

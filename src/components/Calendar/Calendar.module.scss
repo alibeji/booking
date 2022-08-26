@@ -54,3 +54,10 @@
     }
   }
 }
+.skeleton {
+  width: 350px;
+  text-align: center;
+  :first-child {
+    width: 250px;
+  }
+}
