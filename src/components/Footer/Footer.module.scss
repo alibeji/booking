@@ -3,10 +3,14 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 1rem 2rem;
+  margin-top: auto;
+  background-color: #23313a;
+  color: white;
+
   .logoContainer {
     display: flex;
 
-    justify-content: flex-end;
+    align-self: flex-end;
     height: 100%;
   }
   .siteMapContainer {
@@ -18,6 +22,9 @@
       display: flex;
       flex-direction: column;
       padding: 0.5rem;
+      p {
+        font-weight: 700;
+      }
       ul {
         list-style: none;
         padding: 0;

@@ -28,8 +28,8 @@ export default function Navigation() {
       )}
 
       {day && month && year && time && duration && (
-        <button>
-          <CalendarMonthIcon onClick={() => setStep("date")} />
+        <button onClick={() => setStep("date")}>
+          <CalendarMonthIcon />
           {`${dayjs(new Date(year, month, day)).format(
             "D MMMM YYYY"
           )}, ${time}`}

@@ -1,0 +1,61 @@
+.calendarWrapper {
+  height: 100%;
+  .legendWrapper {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    p {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      justify-content: center;
+      span {
+        padding: 0.5rem;
+        border-radius: 4px;
+        &.greenLegend {
+          background-color: #52b34f;
+        }
+        &.redLegend {
+          background-color: #ee1b34;
+        }
+      }
+    }
+  }
+  .timesWrapper {
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    flex-wrap: wrap;
+    background-color: #fafafa;
+    justify-content: center;
+    button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    .selectedTime {
+      font-weight: bold;
+    }
+  }
+  .durationSelector {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2rem;
+    select {
+      align-self: flex-end;
+      width: 80px;
+      height: 26px;
+      border-radius: 10px;
+      border-color: rgba($color: #000000, $alpha: 0.2);
+    }
+  }
+}
+.skeleton {
+  width: 350px;
+  text-align: center;
+  :first-child {
+    width: 250px;
+  }
+}

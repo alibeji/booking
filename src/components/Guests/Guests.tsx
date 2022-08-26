@@ -32,9 +32,11 @@ export default function Guests() {
   };
 
   return (
-    <div className={styles.guestNumberInputWrapper}>
-      <h1>Please choose the number of Guests</h1>
-      <FormControl className={styles.guestNumberInputForm}>
+    <>
+      <h1 className="title">
+        Please <span>choose the number</span> of Guests
+      </h1>
+      <FormControl className="form">
         <OutlinedInput
           className={styles.guestNumberInput}
           type="number"
@@ -80,6 +82,6 @@ export default function Guests() {
           </p>
         )}
       </FormControl>
-    </div>
+    </>
   );
 }
