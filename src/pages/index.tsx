@@ -10,8 +10,8 @@ import { useQuery } from "react-query";
 import fetchRestaurantData from "../utils/api/fetchRestaurantData";
 import Calendar from "../components/Calendar/Calendar";
 import Conditions from "../components/Conditions/Conditions";
-
-const restaurantId = "62c1a011e95e96a91dbfd023";
+import Confirmation from "../components/Confirmation/Confirmation";
+import { restaurantId } from "../constants/restaurantId";
 
 const Home: NextPage = () => {
   const step = useRecoilValue(atomStep);
@@ -34,6 +34,7 @@ const Home: NextPage = () => {
       {data && (step === "conditions" || step === "final") && (
         <Conditions restaurantName={data.name} />
       )}
+      {step === "confirm" && <Confirmation />}
     </div>
   );
 };

@@ -5,6 +5,8 @@ import Layout from "../components/Layout/Layout";
 import { RecoilRoot } from "recoil";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import "../styles/globals.scss";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Layout>
             <Component {...pageProps} />
           </Layout>
+          <ToastContainer />
         </QueryClientProvider>
       </RecoilRoot>
     </ThemeProvider>
