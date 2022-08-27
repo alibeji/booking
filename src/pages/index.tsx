@@ -4,7 +4,6 @@ import { useRecoilValue } from "recoil";
 import Guests from "../components/Guests/Guests";
 import Menu from "../components/Menu/Menu";
 import { step as atomStep } from "../stores/steps";
-import styles from "../styles/Home.module.scss";
 import NavigationModule from "../components/Navigation/Navigation";
 import { useQuery } from "react-query";
 import fetchRestaurantData from "../utils/api/fetchRestaurantData";
@@ -21,7 +20,7 @@ const Home: NextPage = () => {
   );
 
   return (
-    <div className={styles.container}>
+    <div className="container">
       <Head>
         <title>Reservation at {data?.name}</title>
       </Head>

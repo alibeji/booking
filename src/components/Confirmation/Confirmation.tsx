@@ -37,7 +37,7 @@ export default function Confirmation() {
       if (data.cod !== 400) {
         setStep("final");
       } else {
-        console.log(toast.error("something went wrong"));
+        toast.error("something went wrong");
       }
     },
   });
@@ -45,7 +45,7 @@ export default function Confirmation() {
   const { duration, day, guests, menu, month, time, year } =
     useRecoilValue(atomInfo);
 
-  const logData = (data: Pick<Reservation, "email" | "name" | "phone">) => {
+  const callback = (data: Pick<Reservation, "email" | "name" | "phone">) => {
     if (
       duration !== undefined &&
       day !== undefined &&
@@ -78,7 +78,7 @@ export default function Confirmation() {
       <h2 className="title">
         Confirm <span>reservation</span>
       </h2>
-      <form className={styles.form} onSubmit={handleSubmit(logData)}>
+      <form className={styles.form} onSubmit={handleSubmit(callback)}>
         <TextField
           required
           {...register("name")}
