@@ -9,11 +9,11 @@ export default function Footer() {
         <div className={style.restaurantLinks}>
           <p>Restaurant</p>
           <ul>
-            <Link href="/admin/sign-up">
-              <li>Sign-up</li>
+            <Link href="/admin/signup">
+              <li>Sign up</li>
             </Link>
             <Link href="/admin/login">
-              <li>Log-in</li>
+              <li>Login</li>
             </Link>
           </ul>
         </div>

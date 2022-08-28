@@ -7,6 +7,10 @@ import { useMutation } from "react-query";
 import postLogin, { LoginData } from "../../../utils/api/postLogin";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { useSetRecoilState } from "recoil";
+import { userToken } from "../../../stores/token";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const loginSchema = object().shape({
   email: string().email().required(),
@@ -22,7 +26,19 @@ const Login: NextPage = () => {
     resolver: yupResolver(loginSchema),
   });
 
-  const { mutate } = useMutation(postLogin);
+  const { push } = useRouter();
+  const setToken = useSetRecoilState(userToken);
+
+  const { mutate } = useMutation(postLogin, {
+    onSuccess: (data: { cod?: number; message?: string; token?: string }) => {
+      if (data.cod !== 400 && data.token) {
+        setToken(data?.token);
+        push("/admin/create");
+      } else {
+        toast.error(data?.message);
+      }
+    },
+  });
 
   const callback = (data: LoginData) => {
     mutate(data);
@@ -47,11 +63,11 @@ const Login: NextPage = () => {
           />
           <TextField
             {...register("password")}
+            error={errors.password ? true : false}
+            helperText={errors?.password?.message}
             variant="standard"
             label="Password"
             type="password"
-            error={errors.password ? true : false}
-            helperText={errors?.password?.message}
           />
           <Button variant="contained" type="submit">
             Login
