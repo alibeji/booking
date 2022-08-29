@@ -1,16 +1,17 @@
 import React from "react";
 import { useQuery } from "react-query";
 import fetchRestaurantData from "../../utils/api/fetchRestaurantData";
-import { restaurantId } from "../../constants/restaurantId";
+import { id as restaurantId } from "../../stores/id";
 import styles from "./Header.module.scss";
 import { useRouter } from "next/router";
+import { useRecoilValue } from "recoil";
+import RestaurantSelect from "../RestaurantSelect/RestaurantSelect";
+import Link from "next/link";
 
 export default function Header() {
   const router = useRouter();
-
-  const { data } = useQuery("restaurants", () =>
-    fetchRestaurantData(restaurantId)
-  );
+  const id = useRecoilValue(restaurantId);
+  const { data } = useQuery(`restaurant-${id}`, () => fetchRestaurantData(id));
 
   return (
     <div className={styles.header}>
@@ -20,6 +21,12 @@ export default function Header() {
         </p>
       ) : (
         <p>RestoBooking</p>
+      )}
+      {router.asPath.includes("/admin") && (
+        <>
+          <Link href={`/admin/${id}/edit`}>Edit</Link>
+          <RestaurantSelect />
+        </>
       )}
     </div>
   );

@@ -1,13 +1,15 @@
 import { NextPage } from "next";
-import { userToken } from "../../../stores/token";
-import { useUserInfo } from "../../../utils/user/user";
+import RestaurantForm from "../../../components/RestaurantForm/RestaurantForm";
 
 const Create: NextPage = () => {
-  const userInfo = useUserInfo(userToken);
-
-  console.log(userInfo);
-
-  return <div>create</div>;
+  return (
+    <div className="container">
+      <h2 className="title">
+        Create <span>Restaurant</span>
+      </h2>
+      <RestaurantForm />
+    </div>
+  );
 };
 
 export default Create;

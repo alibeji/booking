@@ -7,7 +7,7 @@ export type Restaurant = {
     street: string;
   };
   slots: number;
-  closedDays: string[];
+  closedDays?: number[];
   times: {
     open: string;
     closed: string;

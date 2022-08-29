@@ -1,10 +1,10 @@
 import { useRecoilValue } from "recoil";
 import jwt_decode from "jwt-decode";
-import { RecoilState } from "recoil";
+import { userToken } from "../../stores/token";
 
-export const useUserInfo = (atomToken: RecoilState<string>) => {
-  const token = useRecoilValue(atomToken);
-  const decoded = jwt_decode(token);
+export const useUserInfo = () => {
+  const token = useRecoilValue(userToken);
+  if (token) return jwt_decode(token);
 
-  return decoded;
+  return undefined;
 };
