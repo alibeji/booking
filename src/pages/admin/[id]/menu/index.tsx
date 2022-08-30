@@ -29,7 +29,7 @@ const AddMenu: NextPage = () => {
   );
 
   const putRestaurant = usePutRestaurant(typeof id === "string" ? id : "");
-  const [menus, setMenus] = useState([""]);
+  const [menus, setMenus] = useState<string[]>([]);
   const [newItem, setNewItem] = useState("");
 
   useEffect(() => {

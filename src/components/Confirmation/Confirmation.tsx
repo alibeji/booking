@@ -7,10 +7,10 @@ import { Reservation } from "../../types/reservation";
 import { object, string } from "yup";
 import { info as atomInfo, step } from "../../stores/steps";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { restaurantId } from "../../constants/restaurantId";
 import { useMutation } from "react-query";
 import postReservation from "../../utils/api/postReservation";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const confirmationSchema = object().shape({
   name: string().required(),
@@ -22,6 +22,9 @@ const confirmationSchema = object().shape({
 });
 
 export default function Confirmation() {
+  const router = useRouter();
+  const { id } = router.query;
+
   const {
     register,
     handleSubmit,
@@ -67,7 +70,7 @@ export default function Confirmation() {
         email: data.email,
         phone: data.phone,
         name: data.name,
-        restaurant: restaurantId,
+        restaurant: typeof id === "string" ? id : "",
       };
       mutate(reservationData);
     }

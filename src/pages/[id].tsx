@@ -10,13 +10,15 @@ import fetchRestaurantData from "../utils/api/fetchRestaurantData";
 import Calendar from "../components/Calendar/Calendar";
 import Conditions from "../components/Conditions/Conditions";
 import Confirmation from "../components/Confirmation/Confirmation";
-import { restaurantId } from "../constants/restaurantId";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
   const step = useRecoilValue(atomStep);
+  const router = useRouter();
+  const { id } = router.query;
 
-  const { data } = useQuery("restaurants", () =>
-    fetchRestaurantData(restaurantId)
+  const { data } = useQuery(`restaurant-${id}`, () =>
+    fetchRestaurantData(typeof id === "string" ? id : "")
   );
 
   return (

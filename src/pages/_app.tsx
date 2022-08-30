@@ -8,6 +8,7 @@ import "../styles/globals.scss";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-loading-skeleton/dist/skeleton.css";
+import "react-calendar-timeline/lib/Timeline.css";
 
 const queryClient = new QueryClient();
 
