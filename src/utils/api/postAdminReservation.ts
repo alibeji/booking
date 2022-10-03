@@ -1,10 +1,11 @@
 import { useRecoilValue } from "recoil";
 import { userToken } from "../../stores/token";
+import { Reservation } from "../../types/reservation";
 
 const usePostAdminReservation = () => {
   const token = useRecoilValue(userToken);
 
-  return async (data) => {
+  return async (data: Reservation) => {
     const response = await fetch(`https://be-roan.vercel.app/event`, {
       method: "POST",
       headers: {

@@ -106,6 +106,7 @@ const ReservationForm = ({ id, reservationId, data }: ReservationFormProps) => {
   const postAdminReservation = usePostAdminReservation();
 
   const { mutate } = useMutation(
+    `delete-add-reservation-${id}`,
     reservationId ? deleteReservation : postAdminReservation,
     {
       onSuccess: (data: { cod?: number }) => {
@@ -117,7 +118,7 @@ const ReservationForm = ({ id, reservationId, data }: ReservationFormProps) => {
   );
 
   const deleteCallback = () => {
-    mutate(null);
+    mutate({} as Reservation);
     router.push(`/admin/${id}`);
   };
 
@@ -142,7 +143,7 @@ const ReservationForm = ({ id, reservationId, data }: ReservationFormProps) => {
       guests,
       email,
     };
-    mutate(reservationData);
+    mutate(reservationData as unknown as Reservation);
   };
 
   return (
