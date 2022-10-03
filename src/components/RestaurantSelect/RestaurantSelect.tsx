@@ -4,6 +4,7 @@ import useFetchRestaurants from "../../utils/api/fetchRestaurants";
 import { useQuery } from "react-query";
 import { useRouter } from "next/router";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+
 import MenuItem from "@mui/material/MenuItem";
 
 const RestaurantSelect = () => {
