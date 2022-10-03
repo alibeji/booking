@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import dayjs from "dayjs";
 import React, { useState } from "react";
-import { object, string, number, InferType } from "yup";
+import { object, string, number, InferType, mixed } from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useDeleteReservation from "../../utils/api/deleteReservation";
@@ -20,6 +20,7 @@ import { useRouter } from "next/router";
 import fetchRestaurantData from "../../utils/api/fetchRestaurantData";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import usePostAdminReservation from "../../utils/api/postAdminReservation";
+import { Reservation } from "../../types/reservation";
 dayjs.extend(customParseFormat);
 
 type ReservationData = InferType<typeof ReservationFormSchema> & {
@@ -52,13 +53,15 @@ const ReservationFormSchema = object({
     .max(12)
     .typeError("Please enter a number"),
   menu: string().required(),
-  duration: string().required(),
+  duration: mixed<Reservation["duration"]>()
+    .oneOf(["long", "short"])
+    .required(),
 });
 
 type ReservationFormProps = {
   reservationId?: string;
   id: string;
-  data?: Omit<InferType<typeof ReservationFormSchema>, "time"> & {
+  data?: Omit<InferType<typeof ReservationFormSchema>, "time" | "duration"> & {
     endTime: string;
   };
 };
@@ -130,7 +133,7 @@ const ReservationForm = ({ id, reservationId, data }: ReservationFormProps) => {
   }: ReservationData) => {
     const reservationData = {
       restaurant: id,
-      duration: duration,
+      duration,
       time,
       startDate: dayjs(date, "DD-MM-YYYY").toDate(),
       phone,
