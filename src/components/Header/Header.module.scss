@@ -10,4 +10,17 @@
       font-weight: 700;
     }
   }
+
+  .admin {
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 2rem;
+    align-items: center;
+    width: 95%;
+    margin: auto;
+
+    :last-child {
+      margin: 0 0 0 auto;
+    }
+  }
 }

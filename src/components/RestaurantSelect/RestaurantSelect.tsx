@@ -3,6 +3,8 @@ import { Restaurant } from "../../types/restaurant";
 import useFetchRestaurants from "../../utils/api/fetchRestaurants";
 import { useQuery } from "react-query";
 import { useRouter } from "next/router";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 const RestaurantSelect = () => {
   const router = useRouter();
@@ -12,7 +14,7 @@ const RestaurantSelect = () => {
 
   if (!data?.[0] || data.length < 2) return null;
 
-  const handlechange = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
+  const handlechange = ({ target }: SelectChangeEvent<number>) => {
     const index = Number(target.value);
     const _restaurantId = data[index]._id;
     if (index === restaurant) return;
@@ -21,13 +23,20 @@ const RestaurantSelect = () => {
   };
 
   return (
-    <select value={restaurant} key={restaurant} onChange={handlechange}>
+    <Select
+      variant="standard"
+      sx={{ minWidth: 120, maxHeight: "35px" }}
+      labelId="restaurant-select-label"
+      value={restaurant}
+      key={restaurant}
+      onChange={handlechange}
+    >
       {data.map((name, index) => (
-        <option value={index} key={index}>
+        <MenuItem value={index} key={index}>
           {name.name}
-        </option>
+        </MenuItem>
       ))}
-    </select>
+    </Select>
   );
 };
 

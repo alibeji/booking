@@ -22,6 +22,7 @@ import { Restaurant } from "../../../../types/restaurant";
 const AddMenu: NextPage = () => {
   const {
     query: { id },
+    push,
   } = useRouter();
 
   const { data } = useQuery(`restaurant-${id}`, () =>
@@ -56,14 +57,15 @@ const AddMenu: NextPage = () => {
     setMenus(shallowMenus);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const menu = [...menus];
 
     const restaurantData: Pick<Restaurant, "menu"> = {
       menu,
     };
-    mutate(restaurantData);
+    await mutate(restaurantData);
+    if (id) push(`/admin/${id}`);
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {

@@ -17,14 +17,14 @@ export default function Footer() {
             </Link>
           </ul>
         </div>
-        <div className={style.about}>
+        {/* <div className={style.about}>
           <p>About</p>
           <ul>
             <li>Get in Touch</li>
             <li>Feedback</li>
             <li>Developed by</li>
           </ul>
-        </div>
+        </div> */}
       </div>
       <div className={style.logoContainer}>
         <h4>RestoBooking</h4>

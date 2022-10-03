@@ -82,16 +82,21 @@ const RestaurantForm = ({
   const postRestaurant = usePostRestaurant();
   const putRestaurant = usePutRestaurant(typeof id === "string" ? id : "");
 
-  const { mutate } = useMutation(edit ? putRestaurant : postRestaurant, {
-    onSuccess: (data: { cod?: number }) => {
-      if (data.cod === 400) {
-        toast.error("something went wrong");
-      }
-    },
-  });
+  const { mutateAsync } = useMutation(
+    "change-restaurant",
+    edit ? putRestaurant : postRestaurant,
+    {
+      onSuccess: (data: { cod?: number }) => {
+        if (data.cod === 400) {
+          toast.error("something went wrong");
+        }
+      },
+    }
+  );
 
-  const [selectedDays, setSelectedDays] =
-    useState<CreationSchema["closedDays"]>(closedDays);
+  const [selectedDays, setSelectedDays] = useState<
+    CreationSchema["closedDays"]
+  >(closedDays || []);
 
   const handleAddDay = (event: SelectChangeEvent<number[]>) => {
     const {
@@ -103,7 +108,7 @@ const RestaurantForm = ({
     setSelectedDays(value);
   };
 
-  const callback = ({
+  const callback = async ({
     city,
     closed,
     closedDays,
@@ -127,7 +132,10 @@ const RestaurantForm = ({
         },
       };
 
-      mutate(restaurantData);
+      const res = await mutateAsync(restaurantData);
+      const { _id: id } = res ?? {};
+
+      if (id) router.push(`/admin/${id}${edit ? "" : "/menu"}`);
     }
   };
 

@@ -1,30 +1,16 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { Restaurant } from "../../../types/restaurant";
 import fetchRestaurantData from "../../../utils/api/fetchRestaurantData";
 import useFetchRestaurants from "../../../utils/api/fetchRestaurants";
 import useGetEvents from "../../../utils/api/getEvents";
 import Timeline, { TimelineItemBase } from "react-calendar-timeline";
-// make sure you include the timeline stylesheet or the timeline will not be styled
 import dayjs from "dayjs";
-
-type Events = {
-  _id: string;
-  group: number;
-  startDate: string;
-  endDate: string;
-  name: string;
-  menu: string;
-  guests: number;
-  email: string;
-  phone: number;
-  restaurant: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-};
+import { Event } from "../../../types/event";
+import { Button } from "@mui/material";
+import ReservationModal from "../../../components/ReservationModal/ReservationModal";
 
 const CalendarPage: NextPage = () => {
   const router = useRouter();
@@ -32,6 +18,7 @@ const CalendarPage: NextPage = () => {
   const fetchRestaurants = useFetchRestaurants();
   const getEvents = useGetEvents(typeof id === "string" ? id : "");
   const { data: events } = useQuery(`events-${id}`, () => getEvents());
+  const [modalOpen, setModalOpen] = useState(false);
 
   const { data } = useQuery(`restaurant-${id}`, () =>
     fetchRestaurantData(typeof id === "string" ? id : "")
@@ -55,7 +42,7 @@ const CalendarPage: NextPage = () => {
   });
 
   const items = events.map(
-    ({ _id, group, name: title, startDate, endDate, guests }: Events) => {
+    ({ _id, group, name: title, startDate, endDate, guests }: Event) => {
       const item: TimelineItemBase<Date> = {
         id: _id,
         group,
@@ -69,17 +56,40 @@ const CalendarPage: NextPage = () => {
     }
   );
 
+  const handleClose = () => {
+    setModalOpen(false);
+  };
+
+  const handleModalOpen = () => {
+    setModalOpen(true);
+  };
+
   return (
-    <div className="">
-      <Timeline
-        groups={groups}
-        items={items}
-        defaultTimeStart={dayjs().add(-12, "hour").toDate()}
-        defaultTimeEnd={dayjs().add(12, "hour").toDate()}
-        onItemSelect={(itemId) => {
-          router.push(`/admin/${id}/reservation/${itemId}`);
-        }}
-      />
+    <div className="container" style={{ alignItems: "initial" }}>
+      <h2 className="title" style={{ alignSelf: "center" }}>
+        Your <span>reservations</span>
+      </h2>
+      <Button
+        variant="contained"
+        onClick={handleModalOpen}
+        style={{ alignSelf: "flex-end" }}
+      >
+        ADD RESERVATION
+      </Button>
+      <div>
+        <Timeline
+          groups={groups}
+          items={items}
+          defaultTimeStart={dayjs().add(-12, "hour").toDate()}
+          defaultTimeEnd={dayjs().add(12, "hour").toDate()}
+          onItemSelect={(itemId) => {
+            router.push(`/admin/${id}/reservation/${itemId}`);
+          }}
+        />
+      </div>
+      {typeof id === "string" && (
+        <ReservationModal open={modalOpen} id={id} onClose={handleClose} />
+      )}
     </div>
   );
 };

@@ -13,4 +13,5 @@ export type Restaurant = {
     closed: string;
   };
   userId: string;
+  cod?: number;
 };

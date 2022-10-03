@@ -20,7 +20,7 @@ const usePutRestaurant = (id: string) => {
       }
     );
 
-    return response.json();
+    return response.json() as Promise<Restaurant>;
   };
 };
 

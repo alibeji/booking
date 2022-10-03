@@ -1,33 +1,71 @@
 import React from "react";
 import { useQuery } from "react-query";
 import fetchRestaurantData from "../../utils/api/fetchRestaurantData";
-import { id as restaurantId } from "../../stores/id";
 import styles from "./Header.module.scss";
 import { useRouter } from "next/router";
-import { useRecoilValue } from "recoil";
 import RestaurantSelect from "../RestaurantSelect/RestaurantSelect";
 import Link from "next/link";
+import { Logo } from "../icons/logo";
 
 export default function Header() {
-  const router = useRouter();
-  const id = useRecoilValue(restaurantId);
-  const { data } = useQuery(`restaurant-${id}`, () => fetchRestaurantData(id));
+  const {
+    query: { id },
+    asPath,
+  } = useRouter();
+
+  const { data } = useQuery(
+    `restaurant-${id}`,
+    () => fetchRestaurantData(id as string),
+    {
+      enabled: !!id,
+    }
+  );
+
+  const isAdmin = asPath.includes("/admin");
+
 
   return (
     <div className={styles.header}>
-      {router.asPath === "/" ? (
+      {!isAdmin && (
         <p>
           Reservation at <span>{data?.name}</span>
         </p>
-      ) : (
-        <p>RestoBooking</p>
       )}
-      {router.asPath.includes("/admin") && (
-        <>
-          <Link href={`/admin/${id}/edit`}>Edit</Link>
+
+      {isAdmin && id && (
+        <div className={styles.admin}>
+          <Logo />
+          <StyledLinked id={`/admin/${id}/edit`} label="edit" path={asPath} />
+
+          <StyledLinked id={`/admin/${id}/menu`} label="Menu" path={asPath} />
+          <StyledLinked
+            id={`/admin/${id}`}
+            label="Reservations"
+            path={asPath}
+          />
           <RestaurantSelect />
-        </>
+        </div>
       )}
     </div>
   );
 }
+
+const StyledLinked = ({
+  id,
+  path,
+  label,
+}: {
+  id: string;
+  path: string;
+  label: string;
+}) => (
+  <Link href={id}>
+    <span
+      style={{
+        fontWeight: path === id ? "600" : "initial",
+      }}
+    >
+      {label}
+    </span>
+  </Link>
+);
