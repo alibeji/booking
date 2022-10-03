@@ -8,7 +8,7 @@ const fetchMonth = async (
   month: number
 ): Promise<Record<string, string[]>> => {
   const response = await fetch(
-    `https://be-roan.vercel.app//month?year=${year}&month=${month}&restaurant=${id}`
+    `https://be-roan.vercel.app/month?year=${year}&month=${month}&restaurant=${id}`
   );
 
   return response.json();

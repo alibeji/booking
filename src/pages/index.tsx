@@ -1,40 +1,25 @@
+import React from "react";
 import type { NextPage } from "next";
-import Head from "next/head";
-import { useRecoilValue } from "recoil";
-import Guests from "../components/Guests/Guests";
-import Menu from "../components/Menu/Menu";
-import { step as atomStep } from "../stores/steps";
-import styles from "../styles/Home.module.scss";
-import NavigationModule from "../components/Navigation/Navigation";
-import { useQuery } from "react-query";
-import fetchRestaurantData from "../utils/api/fetchRestaurantData";
-import Calendar from "../components/Calendar/Calendar";
-import Conditions from "../components/Conditions/Conditions";
-import Confirmation from "../components/Confirmation/Confirmation";
-import { restaurantId } from "../constants/restaurantId";
-
-const Home: NextPage = () => {
-  const step = useRecoilValue(atomStep);
-
-  const { data } = useQuery("restaurants", () =>
-    fetchRestaurantData(restaurantId)
-  );
+import { Button } from "@mui/material";
+import Link from "next/link";
+const RestaurantSelect: NextPage = () => {
+  const restaurants = [{ name: "chez ali", id: "630beb02a4e1be72df787259" }];
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Reservation at {data?.name}</title>
-      </Head>
-      {step !== "final" && <NavigationModule />}
-      {step === "guests" && <Guests />}
-      {step === "menu" && <Menu restaurantMenu={data?.menu} />}
-      {step === "date" && <Calendar />}
-      {data && (step === "conditions" || step === "final") && (
-        <Conditions restaurantName={data.name} />
-      )}
-      {step === "confirm" && <Confirmation />}
+    <div className="container">
+      <h2 className="title">
+        Please <span>Select</span> a Restaurant
+      </h2>
+
+      <div>
+        {restaurants.map((restaurant) => (
+          <Link href={`/${restaurant.id}`} key={restaurant.id}>
+            <Button variant="contained">{restaurant.name}</Button>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };
 
-export default Home;
+export default RestaurantSelect;

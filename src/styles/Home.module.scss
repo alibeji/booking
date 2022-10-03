@@ -1,26 +1,3 @@
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  margin-bottom: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  width: 100%;
-  align-items: center;
-}
-
-@media only screen and (max-width: 992px) {
-  .container {
-    max-width: 700px;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .container {
-    max-width: 90%;
-  }
-}
-
 .main {
   min-height: 100vh;
   padding: 4rem 0;

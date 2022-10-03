@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import style from "./Footer.module.scss";
 
@@ -8,18 +9,22 @@ export default function Footer() {
         <div className={style.restaurantLinks}>
           <p>Restaurant</p>
           <ul>
-            <li>Sign-up</li>
-            <li>Log-in</li>
+            <Link href="/admin/signup">
+              <li>Sign up</li>
+            </Link>
+            <Link href="/admin/login">
+              <li>Login</li>
+            </Link>
           </ul>
         </div>
-        <div className={style.about}>
+        {/* <div className={style.about}>
           <p>About</p>
           <ul>
             <li>Get in Touch</li>
             <li>Feedback</li>
             <li>Developed by</li>
           </ul>
-        </div>
+        </div> */}
       </div>
       <div className={style.logoContainer}>
         <h4>RestoBooking</h4>

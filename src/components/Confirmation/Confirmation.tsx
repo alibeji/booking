@@ -7,10 +7,10 @@ import { Reservation } from "../../types/reservation";
 import { object, string } from "yup";
 import { info as atomInfo, step } from "../../stores/steps";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { restaurantId } from "../../constants/restaurantId";
 import { useMutation } from "react-query";
 import postReservation from "../../utils/api/postReservation";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const confirmationSchema = object().shape({
   name: string().required(),
@@ -22,6 +22,9 @@ const confirmationSchema = object().shape({
 });
 
 export default function Confirmation() {
+  const router = useRouter();
+  const { id } = router.query;
+
   const {
     register,
     handleSubmit,
@@ -37,7 +40,7 @@ export default function Confirmation() {
       if (data.cod !== 400) {
         setStep("final");
       } else {
-        console.log(toast.error("something went wrong"));
+        toast.error("something went wrong");
       }
     },
   });
@@ -45,7 +48,7 @@ export default function Confirmation() {
   const { duration, day, guests, menu, month, time, year } =
     useRecoilValue(atomInfo);
 
-  const logData = (data: Pick<Reservation, "email" | "name" | "phone">) => {
+  const callback = (data: Pick<Reservation, "email" | "name" | "phone">) => {
     if (
       duration !== undefined &&
       day !== undefined &&
@@ -67,7 +70,7 @@ export default function Confirmation() {
         email: data.email,
         phone: data.phone,
         name: data.name,
-        restaurant: restaurantId,
+        restaurant: typeof id === "string" ? id : "",
       };
       mutate(reservationData);
     }
@@ -78,7 +81,7 @@ export default function Confirmation() {
       <h2 className="title">
         Confirm <span>reservation</span>
       </h2>
-      <form className={styles.form} onSubmit={handleSubmit(logData)}>
+      <form className={styles.form} onSubmit={handleSubmit(callback)}>
         <TextField
           required
           {...register("name")}

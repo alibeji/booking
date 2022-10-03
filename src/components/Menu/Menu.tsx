@@ -35,14 +35,7 @@ export default function Menu({ restaurantMenu }: MenuProps) {
       <h2 className="title">
         Please <span>choose a Menu</span>
       </h2>
-      <FormControl
-        className="form"
-        /*         sx={{
-          display: "flex",
-          flexDirection: "column",
-          rowGap: "2rem",
-        }} */
-      >
+      <FormControl className="form">
         <RadioGroup onChange={handleChange} value={menu}>
           {restaurantMenu?.map((meal) => (
             <FormControlLabel
