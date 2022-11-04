@@ -1,6 +1,6 @@
 # App
 
-The app is deployed [here](booking-pi.vercel.app) using Vercel.
+The app is deployed [here](https://booking-pi.vercel.app/) using Vercel.
 
 ## Getting Started
 
